@@ -1,0 +1,10 @@
+ALTER DATABASE jsbin CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+ALTER TABLE sandbox
+  ENGINE = InnoDB,
+  ADD COLUMN active CHAR(1) NOT NULL DEFAULT 'y' AFTER url,
+  ADD COLUMN reported DATETIME DEFAULT NULL AFTER active,
+  CHANGE COLUMN javascript javascript MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  CHANGE COLUMN html html MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  CHANGE COLUMN css css MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
