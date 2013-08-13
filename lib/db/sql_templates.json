@@ -15,7 +15,8 @@
   "getAllOwners": "SELECT * FROM `owners`",
   "getOwnersBlock": "SELECT * FROM `owners` LIMIT ?, ?",
   "getLatestBinForUser": "SELECT `url`, `revision` FROM `owners` WHERE `name`=? AND `last_updated` != 0 ORDER BY `last_updated` DESC LIMIT 1",
-  "isOwnerOf": "SELECT name=? as `owner` FROM `owners` WHERE `url`=? AND `revision`=1",
+  "isOwnerOf": "SELECT name=? as `owner` FROM `owners` WHERE `url`=? AND `revision`=?",
+  "owner": "SELECT * FROM owners, ownership WHERE owners.url=? AND owners.revision=? AND owners.name=ownership.name",
   "getUserBinCount": "SELECT COUNT(*) as total FROM `owners` WHERE `name`=?",
 
   "setBin": "INSERT INTO `sandbox` (`javascript`, `css`, `html`, `created`, `last_viewed`, `url`, `revision`, `streaming_key`, `settings`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
