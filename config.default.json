@@ -66,6 +66,9 @@
     "css": [],
     "javascript": []
   },
+  "urls": {
+    "issues": "/issues"
+  },
   "reserved": [
     "donate",
     "list",
