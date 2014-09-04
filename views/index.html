@@ -2,7 +2,7 @@
 <html id="jsbin" lang="en" class="{{#if flash_tip}}showtip{{/if}}{{#if embed}} embed{{/if}}{{#equal editorLayout "0"}}{{else}} layout layout{{editorLayout}}{{/equal}}">
 <head>
   <meta charset=utf-8>
-  <title>JS Bin - Collaborative JavaScript Debugging</title>
+  <title>Cobalt Rev - Collaborative JavaScript Debugging</title>
   <link rel="icon" href="{{static}}/images/favicon.png">
   <link rel="stylesheet" href="{{static}}/css/style.css{{cacheBust}}">
   <link rel="stylesheet" href="{{static}}/css/flat-ui.css{{cacheBust}}">
@@ -47,35 +47,36 @@ if(top != self) {
     <div class="buttons">
       {{#if embed}}
         <span class="menu">
+<<<<<<< HEAD
           <a target="_blank" href="{{code_id_path}}/edit" class="brand button group"><img src="{{static}}/images/favicon.svg">
-          <h1>JS Bin</h1></a><a href="/clone" target="_blank" class="button">Save</a>
+          <h1>Cobalt Rev</h1></a><a href="/clone" target="_blank" class="button">Save</a>
         </span>
       {{else}}
         <div class="menu">
-          <a href="{{root}}{{code_id_path}}/edit#{{#feature request "fileMenuTest"}}file{{else}}bins{{/feature}}" target="_blank" class="brand button button-dropdown group button-dropdown-arrow"><img src="{{static}}/images/favicon.svg"> {{#feature request "fileMenuTest"}}File{{else}}Bins{{/feature}}</a>
-          <div class="dropdown" id="{{#feature request "fileMenuTest"}}file{{else}}bins{{/feature}}">
+          <a href="{{root}}{{code_id_path}}/edit#{{#feature request "fileMenuTest"}}file{{else}}bins{{/feature}}" target="_blank" class="brand button button-dropdown group button-dropdown-arrow"><img src="{{static}}/images/favicon.svg"> {{#feature request "fileMenuTest"}}File{{else}}Revs{{/feature}}</a>
+          <div class="dropdown" id="{{#feature request "fileMenuTest"}}file{{else}}revs{{/feature}}">
             <div class="dropdownmenu">
-              <a id="createnew" data-desc="Create a brand new bin" class="button group" title="Create fresh bin" href="{{root}}" data-label="new">New</a>
+              <a id="createnew" data-desc="Create a brand new rev" class="button group" title="Create fresh rev" href="{{root}}" data-label="new">New</a>
               {{#feature request "private"}}
-              <a id="public" data-desc="Set this bin to public" class="visibilityToggle button group"   title="Set this bin to public" href="{{root}}" data-label="public" data-vis="public">Make bin public</a>
-              <a id="private" data-desc="Set this bin to private" class="visibilityToggle button group" title="Set this bin to private" href="{{root}}" data-label="private" data-vis="private">Make bin private</a>
+              <a id="public" data-desc="Set this rev to public" class="visibilityToggle button group"   title="Set this rev to public" href="{{root}}" data-label="public" data-vis="public">Make rev public</a>
+              <a id="private" data-desc="Set this rev to private" class="visibilityToggle button group" title="Set this rev to private" href="{{root}}" data-label="private" data-vis="private">Make rev private</a>
               {{else}}
                 {{#feature request "upgrade"}}
               <a data-desc="Set this bin to private" data-pro="true" class="button group" title="Set this bin to private" href="{{root}}/upgrade">Make bin private</a>
                 {{/feature}}
               {{/feature}}
               {{#feature request "delete"}}
-              <a class="deletebin button group" data-desc="Delete bin" title="Delete this bin" href="{{root}}/delete" data-shortcut="ctrl+shift+del">Delete</a>
+              <a class="deleterev button group" data-desc="Delete rev" title="Delete this rev" href="{{root}}/delete" data-shortcut="ctrl+shift+del">Delete</a>
               {{/feature}}
               <a class="archivebin button group" data-desc="Archive bin" title="Archive this bin" href="{{code_id_path}}/archive" data-shortcut="ctrl+y">Archive</a>
               <a class="unarchivebin button group" data-desc="Unrchive bin" title="Restore this bin from the archive" href="{{code_id_path}}/unarchive" data-shortcut="ctrl+shift+y">Unarchive</a>
               {{#if home}}
-              <a href="#" data-desc="Browse your previous created bins" data-shortcut="ctrl+o" class="button group homebtn" data-label="open">My Bins{{#if bincount}} <span class="meta">({{bincount}})</span>{{/if}}</a>
+              <a href="#" data-desc="Browse your previous created revs" data-shortcut="ctrl+o" class="button group homebtn" data-label="open">My Revs{{#if bincount}} <span class="meta">({{bincount}})</span>{{/if}}</a>
               {{/if}}
               <hr data-desc="">
-              <a id="addmeta" data-desc="Insert a description shown in My Bins" title="Add meta data to bin" class="button group" href="#add-description">Add description</a>
+              <a id="addmeta" data-desc="Insert a description shown in My Revs" title="Add meta data to rev" class="button group" href="#add-description">Add description</a>
               <a title="Create milestone" data-desc="Save current work, and begin new revision on next change" data-shortcut="ctrl+s" class="button save group" data-label="save" href="{{root}}/save">Create milestone</a>
-              <a data-desc="Copy and create a new bin start at revision #1" data-shortcut="ctrl+shift+s" id="clone" title="Create a new copy" class="button clone group" data-label="clone" href="{{root}}/clone">Clone</a>
+              <a data-desc="Copy and create a new rev start at revision #1" data-shortcut="ctrl+shift+s" id="clone" title="Create a new copy" class="button clone group" data-label="clone" href="{{root}}/clone">Clone</a>
               <hr data-desc="">
               {{#feature request "upgrade"}}
                 {{#feature request "vanity"}}
@@ -84,10 +85,11 @@ if(top != self) {
               <a data-pro="true" data-desc="Publish the current bin to {{vanity}}" class="button group" title="Publish the current bin to {{vanity}}" href="{{root}}/upgrade">Publish to vanity homepage</a>
                 {{/feature}}
               {{/feature}}
-              <a data-desc="Export individual panels to Github's gist{{#unless user.github_token}} as an anonymous user{{/unless}}" class="export-as-gist button group" title="Create a new {{#unless user.github_token}}anonymous {{/unless}}GitHub Gist from this bin" href="#export-to-gist">Export as gist</a>
-              <a data-desc="Download a complete html file for this bin" id="download" title="Save to local drive" class="button download group" href="{{root}}/download" data-label="download">Download</a>
-              <a data-desc="Use content from this bin when creating new bins" class="startingpoint button group" title="Set as starting code" href="{{root}}/save" data-label="save-as-template">Save as template</a>
-              <a hidden data-desc="How to embed a bin" target="_blank" title="How to embed a bin" data-label="how-to-embed" class="button group" href="http://jsbin.com/help/how-can-i-embed-jsbin">How to embed</a>
+              <a data-desc="Export individual panels to Github's gist{{#unless user.github_token}} as an anonymous user{{/unless}}" class="export-as-gist button group" title="Create a new {{#unless user.github_token}}anonymous {{/unless}}GitHub Gist from this rev" href="#export-to-gist">Export as gist</a>
+              <a data-desc="Download a complete html file for this rev" id="download" title="Save to local drive" class="button download group" href="{{root}}/download" data-label="download">Download</a>
+              <a data-desc="Use content from this rev when creating new revs" class="startingpoint button group" title="Set as starting code" href="{{root}}/save" data-label="save-as-template">Save as template</a>
+              <a hidden data-desc="How to embed a rev" target="_blank" title="How to embed a rev" data-label="how-to-embed" class="button group" href="http://jsbin.com/help/how-can-i-embed-jsbin">How to embed</a>
+              <!-- <a data-desc="Reset to the original Cobalt Rev starting point" id="cleartemplate" title="Reset to the original Cobalt Rev starting template" class="button group" href="#clear-template" data-label="clear-template">Clear template</a> -->
             </div>
           </div>
         </div><div class="menu">
@@ -99,7 +101,7 @@ if(top != self) {
           <div class="dropdown" id="share">
             <div class="dropdowncontent">
               <form>
-                <div data-desc="This bin's full output without the JS Bin editor">
+                <div data-desc="This rev's full output without the Cobalt Rev editor">
                   <strong><a class="link" data-path="/" target="_blank" href="{{root}}{{code_id_path}}">Output only (with live reload)</a></strong><br><input data-path="/" class="link" id="livepreview" value="{{root}}{{code_id_path}}/" type="text">
                 </div>
                 <hr>
@@ -113,16 +115,16 @@ if(top != self) {
                     <li><label><input type="checkbox" data-panel="live">Output</label></li>
                   </ul>
                 </div>
-                <div data-desc="The url to this bin with the JS Bin editor">
+                <div data-desc="The url to this rev with the Cobalt Rev editor">
                   <a class="link heading" data-path="/edit" target="_blank" href="{{root}}{{code_id_path}}/edit">Link</a><br><input data-path="/edit" class="link" value="{{root}}{{code_id_path}}/edit" type="text">
                 </div>
-                <div data-desc="Embed this bin with the live output on your site">
-                  <span class="heading">Embed</span><br><textarea id="embedfield" data-path="/embed" class="link">&lt;a class=&quot;jsbin-embed&quot; href=&quot;{{root}}{{code_id_path}}/embed?live&quot;&gt;JS Bin demo&lt;/a&gt;&lt;script src=&quot;{{static}}/js/embed.js&quot;&gt;&lt;/script&gt;</textarea>
+                <div data-desc="Embed this rev with the live output on your site">
+                  <span class="heading">Embed</span><br><textarea id="embedfield" data-path="/embed" class="link">&lt;a class=&quot;jsbin-embed&quot; href=&quot;{{root}}{{code_id_path}}/embed?live&quot;&gt;Cobalt Rev demo&lt;/a&gt;&lt;script src=&quot;{{static}}/js/embed.js&quot;&gt;&lt;/script&gt;</textarea>
                 </div>
-                <div data-desc="Training/Viewer mode: codecast your bin to any viewers" class="disabled">
-                  <a class="link heading" target="_blank" data-path="/watch" href="{{root}}{{code_id_path}}/watch">Codecast</a><br><input data-path="/watch" class="link" value="{{root}}{{code_id_path}}/watch" type="text">
+                <div data-desc="Training/Viewer mode: codecast your rev to any viewers" class="disabled">
+                  <a class="link heading" target="_blank" data-path="/watch" href="{{root}}{{code_id_path}}/watch">Codecast</a></br><input data-path="/watch" class="link" value="{{root}}{{code_id_path}}/watch" type="text">
                 </div>
-                <div data-desc="Disallow further changes to this specific revision" data-shortcut="ctrl+s" class="lockoption" id="enablelock"><div title="Locks the bin's content so no more changes will be made this URL, and typing will create a new bin as if you 'created milestone'" class="icon-unlocked lockrevision"><span>Click to lock and prevent further changes</span></div></div>
+                <div data-desc="Disallow further changes to this specific revision" data-shortcut="ctrl+s" class="lockoption" id="enablelock"><div title="Locks the rev's content so no more changes will be made this URL, and typing will create a new rev as if you 'created milestone'" class="icon-unlocked lockrevision"><span>Click to lock and prevent further changes</span></div></div>
               </form>
             </div>
 
@@ -307,17 +309,17 @@ if(top != self) {
           <div class="dropdown dd-right" id="help">
             <div class="dropdownmenu">
               <a data-shortcut="ctrl+shift+?" data-desc="Discover poweruser keyboard shortcuts" id="showhelp" href="#keyboardHelp">Keyboard shortcuts</a>
-              <a data-desc="Shortcut & direct access JS Bin URLs" id="showurls" href="#urls">JS Bin URLs</a>
+              <a data-desc="Shortcut & direct access Cobalt Rev URLs" id="showurls" href="#urls">Cobalt Rev URLs</a>
               <hr data-desc="">
               {{#if settings.[ui showblog]}}
               <input placeholder="Search help..." class="button" id="helpsearch"><span id="result-count"></span><span id="results"></span>
               <a data-desc="Learn about JS Bin features & tricks" target="_blank" href="http://jsbin.com/help">All help topics</a>
               {{else}}
-              <a data-desc="Learn about JS Bin features & tricks" target="_blank" href="http://jsbin.com/help">Help topics</a>
+              <a data-desc="Learn about Cobalt Rev features & tricks" target="_blank" href="http://jsbin.com/help">Help topics</a>
               {{/if}}
               <hr data-desc="">
-              <a data-desc="Help make JS Bin better" id="newissue" target="_blank" href="http://github.com/jsbin/jsbin/issues/new">Send feedback &amp; file bugs</a>
-              <a data-desc="Help make JS Bin better" target="_blank" href="http://github.com/jsbin/jsbin/">Fork on Github</a>
+              <a data-desc="Help make Cobalt Rev better" id="newissue" target="_blank" href="http://github.com/willsp/jsbin/issues/new">Send feedback &amp; file bugs</a>
+              <a data-desc="Help make Cobalt Rev better" target="_blank" href="http://github.com/willsp/jsbin/">Fork on Github</a>
               <a data-desc="Find out the latest news & info" target="_blank" href="http://twitter.com/js_bin">Follow @js_bin</a>
             </div>
           </div>
@@ -326,7 +328,7 @@ if(top != self) {
     </div>
   </div>
 </div>
-<div id="bin" class="stretch" style="opacity: 0; filter:alpha(opacity=0);">
+<div id="rev" class="stretch" style="opacity: 0; filter:alpha(opacity=0);">
   <div id="source" class="binview stretch">
   </div>
   <div id="panelswaiting">
@@ -417,8 +419,8 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
 </div>
 <div id="tip" class="{{#if flash_tip_type}}{{flash_tip_type}}{{/if}}{{#unless flash_tip_type}} notification{{/unless}}">
   <p>
-    {{#if flash_tip}}{{{flash_tip}}}{{/if}}
-    {{#unless flash_tip}}You can jump to the latest bin by adding <code>/latest</code> to your URL{{/unless}}
+    {{#if flash_tip}}{{flash_tip}}{{/if}}
+    {{#unless flash_tip}}You can jump to the latest rev by adding <code>/latest</code> to your URL{{/unless}}
   </p>
   <a class="dismiss" href="#">Dismiss x</a>
 </div>
@@ -475,24 +477,24 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
         </tr>
         <tr>
           <td>ctrl + s</td>
-          <td>Save &amp; lock current Bin from further changes</td>
+          <td>Save &amp; lock current Rev from further changes</td>
         </tr>
         <tr>
           <td>ctrl + shift + s</td>
-          <td>Clone Bin</td>
+          <td>Clone Rev</td>
         </tr>
         <tr>
           <td>ctrl + y</td>
-          <td>Archive Bin</td>
+          <td>Archive Rev</td>
         </tr>
-        <tr><td colspan="2"><small><br><a href="/help/keyboard-shortcuts" target="_blank">Complete list of JS Bin shortcuts</a></small></td></tr>
+        <tr><td colspan="2"><small><br><a href="/help/keyboard-shortcuts" target="_blank">Complete list of Cobart Rev shortcuts</a></small></td></tr>
       </tbody>
     </table>
   </div>
 </div>
 <div id="urlHelp" class="modal">
   <div>
-    <h2>JS Bin URLs</h2>
+    <h2>Cobalt Rev URLs</h2>
     <table>
       <thead>
         <tr>
@@ -507,7 +509,7 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
         </tr>
         <tr>
           <td>/edit</td>
-          <td>Edit the current bin</td>
+          <td>Edit the current rev</td>
         </tr>
         <tr>
           <td>/watch</td>
@@ -515,23 +517,23 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
         </tr>
         <tr>
           <td>/embed</td>
-          <td>Create an embeddable version of the bin</td>
+          <td>Create an embeddable version of the rev</td>
         </tr>
         <tr>
           <td>/latest</td>
-          <td>Load the very latest bin (/latest goes in place of the revision)</td>
+          <td>Load the very latest rev (/latest goes in place of the revision)</td>
         </tr>
         <tr>
           <td>/{{#if home}}{{home}}{{/if}}{{#unless home}}[username]{{/unless}}/last</td>
-          <td>View the last edited bin for this user</td>
+          <td>View the last edited rev for this user</td>
         </tr>
         <tr>
           <td>/{{#if home}}{{home}}{{/if}}{{#unless home}}[username]{{/unless}}/last/edit</td>
-          <td>Edit the last edited bin for this user</td>
+          <td>Edit the last edited rev for this user</td>
         </tr>
         <tr>
           <td>/{{#if home}}{{home}}{{/if}}{{#unless home}}[username]{{/unless}}/last/watch</td>
-          <td>Follow the Code Casting session for the latest bin for this user</td>
+          <td>Follow the Code Casting session for the latest rev for this user</td>
         </tr>
         <tr>
           <td>/quiet</td>
@@ -539,13 +541,13 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
         </tr>
         <tr>
           <td>.js</td>
-          <td>Load only the JavaScript for a bin</td>
+          <td>Load only the JavaScript for a rev</td>
         </tr>
         <tr>
           <td>.css</td>
-          <td>Load only the CSS for a bin</td>
+          <td>Load only the CSS for a rev</td>
         </tr>
-        <tr><td colspan="2"><br><small>Except for username prefixed urls, the url may start with http://jsbin.com/abc and the url fragments can be added to the url to view it differently.</small></td></tr>
+        <tr><td colspan="2"><br><small>Except for username prefixed urls, the url may start with http://rev.cobalt.com/abc and the url fragments can be added to the url to view it differently.</small></td></tr>
       </tbody>
     </table>
   </div>
@@ -557,7 +559,7 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
     <header><img>
       <div class="visibility"></div>
       <div class="meta">
-        <div class="author">Bin info</div>
+        <div class="author">Rev info</div>
         <div class="name"><b></b><span class="pro">pro</span></div><span class="when"><canvas></canvas><time></time></span>
       </div>
       <div class="viewers"><b>0</b><span>viewers</span></div>
@@ -569,7 +571,7 @@ Include alerts, prompts &amp; confirm boxes">Run with JS</button>
         <li><a class="export-as-gist" href="#export-gist">Export gist</a> </li>
         <li class="owner"><a href="/download">Download</a> </li>
         {{#feature request "delete"}}
-        <li class="owner"><a class="deletebin" href="/delete">Delete</a></li>
+        <li class="owner"><a class="deleterev" href="/delete">Delete</a></li>
         {{/feature}}
       </ul>
     </div>

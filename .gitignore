@@ -1,5 +1,6 @@
 logs
 logs/*
+npm-debug.log
 config.*.json
 public/js/jsbin*.js
 .nodemonignore
